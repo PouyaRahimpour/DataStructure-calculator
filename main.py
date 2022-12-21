@@ -12,7 +12,4 @@ class stack:
         return self.elements[-1]
 
     def is_empty(self):
-        return len.(self.elements)==0
-
-
-
+        return len(self.elements) == 0
