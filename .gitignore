@@ -196,3 +196,6 @@ pip-selfcheck.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode,venvvenv/
 .vscode/
+# oue own things to ignore
+DivideAndConquer.png
+startproject.cpp
