@@ -1,7 +1,7 @@
 class Stack:
-    def __init__(self, size):
+    def __init__(self, size=0):
+        self.size = size
         self.elements = []
-        self.size = 0
 
     def push(self, data):
         self.elements.append(data)
@@ -33,67 +33,60 @@ priority = {
 
 
 def ReversePolishNotationConvertor(mstring):
+    rise = 0
+    lastpriority = 0
     littlestack = Stack(0)
-    littlelist = []
-    x = 0
-    while x < len(mstring):
+    result = ""
 
-        if mstring[x].isnumeric():
-            if littlelist[-1].isnumeric():
-                littlelist[-1] += mstring[x]
-            else:
-                littlelist.append(mstring[x])
-            x += 1
+    for x in mstring:
+
+        if x.isnumeric():
+            result += x
         else:
-            if mstring[x] == '(':
-                priority["+"] += priority["("]
-                priority["-"] += priority["("]
-                priority["/"] += priority["("]
-                priority["*"] += priority["("]
-                priority["^"] += priority["("]
-                x += 1
-            elif mstring[x] == ')':
-                priority["+"] -= priority[")"]
-                priority["-"] -= priority[")"]
-                priority["/"] -= priority[")"]
-                priority["*"] -= priority[")"]
-                priority["^"] -= priority[")"]
-                x += 1
+            result += " "
+            if x == '(':
+                rise += 2
+            elif x == ')':
+                rise -= 2
             else:
-                if priority[littlestack.peek()] <= priority[mstring[x]]:
-                    littlestack.push(mstring[x])
-                    x += 1
+                if lastpriority <= priority[x] + rise:
+                    littlestack.push(x)
+                    lastpriority = priority[x] + rise
                 else:
                     while not littlestack.is_empty():
-                        littlelist.append(littlestack.pop())
-                    littlestack.push(mstring[x])
-                    x += 1
+                        result += littlestack.pop()
+                    littlestack.push(x)
     while not littlestack.is_empty():
-        littlelist.append(littlestack.pop())
-    return littlelist
+        result += littlestack.pop()
+    return result
 
-# n = int(input())
-# expression = input().split()
-# stack = []
-# for element in expression:
-#     if element == "+":
-#         x = int(stack.pop())
-#         y = int(stack.pop())
-#         stack.append(str(y+x))
-#     elif element == "-":
-#         x = int(stack.pop())
-#         y = int(stack.pop())
-#         stack.append(str(y-x))
-#     elif element == "*":
-#         x = int(stack.pop())
-#         y = int(stack.pop())
-#         stack.append(str(y*x))
-#     elif element == "/":
-#         x = int(stack.pop())
-#         y = int(stack.pop())
-#         stack.append(str(y//x))
-#     else:
-#         stack.append(element)
 
-# answer = stack.pop()
-# print(answer)
+def ReversePolishNotationCalculator(rpn_string):
+    expression = rpn_string.split()
+    stack = Stack(0)
+    for element in expression:
+        if element == "+":
+            x = int(stack.pop())
+            y = int(stack.pop())
+            stack.append(str(y + x))
+        elif element == "-":
+            x = int(stack.pop())
+            y = int(stack.pop())
+            stack.append(str(y - x))
+        elif element == "*":
+            x = int(stack.pop())
+            y = int(stack.pop())
+            stack.append(str(y * x))
+        elif element == "/":
+            x = int(stack.pop())
+            y = int(stack.pop())
+            stack.append(str(y // x))
+        elif element == "^":
+            x = int(stack.pop())
+            y = int(stack.pop())
+            stack.append(str(y ^ x))
+        else:
+            stack.append(element)
+
+    answer = stack.pop()
+    print(answer)
