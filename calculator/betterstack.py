@@ -19,6 +19,7 @@ class Stack:
     def is_empty(self):
         return len(self.elements) == 0
 
+
 priority = {
     -1: -1,
     '+': 0,
@@ -30,6 +31,7 @@ priority = {
     ')': 2
 }
 
+
 def ReversePolishNotationConvertor(mstring):
     littlestack = Stack(0)
     littlelist = []
@@ -37,7 +39,10 @@ def ReversePolishNotationConvertor(mstring):
     while x < len(mstring):
 
         if mstring[x].isnumeric():
-            littlelist.append(mstring[x])
+            if littlelist[-1].isnumeric():
+                littlelist[-1] += mstring[x]
+            else:
+                littlelist.append(mstring[x])
             x += 1
         else:
             if mstring[x] == '(':
@@ -63,8 +68,10 @@ def ReversePolishNotationConvertor(mstring):
                         littlelist.append(littlestack.pop())
                     littlestack.push(mstring[x])
                     x += 1
+    while not littlestack.is_empty():
+        littlelist.append(littlestack.pop())
     return littlelist
-    
+
 # n = int(input())
 # expression = input().split()
 # stack = []
@@ -90,5 +97,3 @@ def ReversePolishNotationConvertor(mstring):
 
 # answer = stack.pop()
 # print(answer)
-    
-
