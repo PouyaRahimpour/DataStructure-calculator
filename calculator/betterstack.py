@@ -43,19 +43,21 @@ def ReversePolishNotationConvertor(mstring):
         if x.isnumeric():
             result += x
         else:
-            result += " "
             if x == '(':
                 rise += 2
             elif x == ')':
                 rise -= 2
             else:
+                result += " "
                 if lastpriority <= priority[x] + rise:
                     littlestack.push(x)
+                    littlestack.push(" ")
                     lastpriority = priority[x] + rise
                 else:
                     while not littlestack.is_empty():
                         result += littlestack.pop()
                     littlestack.push(x)
+                    littlestack.push(" ")
     while not littlestack.is_empty():
         result += littlestack.pop()
     return result
@@ -68,25 +70,28 @@ def ReversePolishNotationCalculator(rpn_string):
         if element == "+":
             x = int(stack.pop())
             y = int(stack.pop())
-            stack.append(str(y + x))
+            stack.push(str(y + x))
         elif element == "-":
             x = int(stack.pop())
             y = int(stack.pop())
-            stack.append(str(y - x))
+            stack.push(str(y - x))
         elif element == "*":
             x = int(stack.pop())
             y = int(stack.pop())
-            stack.append(str(y * x))
+            stack.push(str(y * x))
         elif element == "/":
             x = int(stack.pop())
             y = int(stack.pop())
-            stack.append(str(y // x))
+            stack.push(str(y // x))
         elif element == "^":
             x = int(stack.pop())
             y = int(stack.pop())
-            stack.append(str(y ^ x))
+            stack.push(str(y ** x))
         else:
-            stack.append(element)
-
+            stack.push(element)
     answer = stack.pop()
-    print(answer)
+    return answer
+
+
+
+
