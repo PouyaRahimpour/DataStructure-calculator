@@ -64,3 +64,31 @@ def ReversePolishNotationConvertor(mstring):
                     littlestack.push(mstring[x])
                     x += 1
     return littlelist
+    
+# n = int(input())
+# expression = input().split()
+# stack = []
+# for element in expression:
+#     if element == "+":
+#         x = int(stack.pop())
+#         y = int(stack.pop())
+#         stack.append(str(y+x))
+#     elif element == "-":
+#         x = int(stack.pop())
+#         y = int(stack.pop())
+#         stack.append(str(y-x))
+#     elif element == "*":
+#         x = int(stack.pop())
+#         y = int(stack.pop())
+#         stack.append(str(y*x))
+#     elif element == "/":
+#         x = int(stack.pop())
+#         y = int(stack.pop())
+#         stack.append(str(y//x))
+#     else:
+#         stack.append(element)
+
+# answer = stack.pop()
+# print(answer)
+    
+

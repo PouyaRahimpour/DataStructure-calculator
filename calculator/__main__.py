@@ -1,4 +1,4 @@
-from . import Stack
+import stack
 
 if __name__ == __main__:
     math_string = input()
