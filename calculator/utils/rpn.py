@@ -1,4 +1,4 @@
-from betterstack import Stack
+from .stack import Stack
 
 priority = {
     -1: -1,
