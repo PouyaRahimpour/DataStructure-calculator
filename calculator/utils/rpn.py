@@ -70,9 +70,12 @@ def reverse_polish_notation_calculator(rpn_string):
             stack.push(str(y ** x))
         else:
             stack.push(element)
-    answer = stack.pop()
+
+
     if stack.is_empty():
         raise IndexError("not correct one...")
+
+    answer = stack.pop()
     return answer
 
 

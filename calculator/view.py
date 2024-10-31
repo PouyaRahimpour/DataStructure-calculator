@@ -1,5 +1,5 @@
 from tkinter import *
-from utils.evaluate import evaluate_math_string
+from .utils.evaluate import evaluate_math_string
 
 win = Tk()
 win.geometry("450x390") 
